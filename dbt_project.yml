@@ -20,12 +20,11 @@ clean-targets:
 require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 models:
-  jaffle_shop:
-    marts:
-      staging:
+  jaffle_shop: 
+    staging:
         schema: raw
         +materialized: view
 
-      core:
+    marts:
         schema: analytics
         +materialized: table
