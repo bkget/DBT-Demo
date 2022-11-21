@@ -1,0 +1,9 @@
+{% macro limit_data_in_dev(column_name, dev_day_of_data=3) -%}
+
+    {%- if target.name == 'dev' -%}
+
+       WHERE {{column_name}} >= dateadd('day', -{{dev_day_of_data}}, current_timestamp)
+       
+    {%- endif -%}
+
+{%- endmacro %}
