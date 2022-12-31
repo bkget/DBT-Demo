@@ -17,9 +17,16 @@ clean-targets:
     - "dbt_modules"
     - "logs"
 
+on-run-start: "{{ insert_audits('run_start') }}"
+on-run-end: "{{ insert_audits('run_end') }}"
+
 require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 models:
+
+  pre-hook: "{{ insert_audits('model_start') }}"
+  post-hook: "{{ insert_audits('model_start') }}"
+
   jaffle_shop: 
     staging:
         schema: raw
