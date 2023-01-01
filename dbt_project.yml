@@ -29,9 +29,23 @@ models:
 
   jaffle_shop: 
     staging:
-        schema: raw
+        schema: staging
         +materialized: view
 
     marts:
+      core:
         schema: analytics
         +materialized: table
+
+seeds:
+  jaffle_shop:
+    +enabled: true
+
+    raw_customers:
+      +schema: jaffle_shop
+
+    raw_orders:
+      +schema: jaffle_shop
+      
+    raw_payments:
+      +schema: stripe
