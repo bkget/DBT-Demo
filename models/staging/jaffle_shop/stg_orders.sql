@@ -1,27 +1,41 @@
-with source as (
+WITH source AS (
 
-    {#-
-    Normally we would select from the table here, but we are using seeds to load
-    our data in this project
-    #}
-    select * from {{ source('jaffle_shop', 'raw_orders') }}
+    {{
+        config(
+            materialized = 'incremental',
+            unique_key = 'order_id'
+        )
+    }}
 
-    {# Set the limit for 1000 days order data #}
+
+    -- Normally we would SELECT FROM the table here, but we are using seeds to load
+    -- our data in this project
+    
+    
+    SELECT
+    
+      * 
+    
+    FROM {{ source('jaffle_shop', 'raw_orders') }}
+
+   -- Set the limit for 1000 days order data
 
     -- {{limit_data_in_dev('order_date', 1000)}}
 
 ),
 
-renamed as (
+renamed AS (
 
-    select
-        id as order_id,
-        user_id as customer_id,
+    SELECT
+        id AS order_id,
+        user_id AS customer_id,
         order_date,
         status
 
-    from source
+    FROM source
 
 )
 
-select * from renamed
+SELECT 
+   *
+FROM renamed
