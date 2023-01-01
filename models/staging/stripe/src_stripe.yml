@@ -2,7 +2,12 @@ version: 2
 
 sources:
   - name: stripe
-    database: raw
-    schema: stripe
+    database: jaffle_shop
+    schema: public_stripe
     tables:
-      - name: payment
+      - name: raw_payments
+        columns:          
+          - name: id 
+            tests:
+              - unique
+              - not_null
