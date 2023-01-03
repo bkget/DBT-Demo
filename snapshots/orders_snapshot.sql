@@ -2,7 +2,7 @@
 
     {{
         config(
-            target_schema = 'public_jaffle_shop',
+            target_schema = 'jaffle_shop',
             strategy = 'check',
             unique_key = 'order_id',
             check_cols = ['status']

@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: stripe
     database: jaffle_shop
-    schema: public_stripe
+    schema: stripe
     tables:
       - name: raw_payments
         columns:          
