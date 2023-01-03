@@ -7,20 +7,19 @@ WITH source AS (
         )
     }}
 
-
-    -- Normally we would SELECT FROM the table here, but we are using seeds to load
-    -- our data in this project
-    
+    -- Normally we would SELECT FROM the table here, but I am using seeds to load the data in this project
     
     SELECT
     
       * 
     
-    FROM {{ source('jaffle_shop', 'raw_orders') }}
+    -- FROM {{ source('jaffle_shop', 'raw_orders') }}
+    FROM {{ ref('orders_snapshot') }} 
 
-   -- Set the limit for 1000 days order data
+    WHERE dbt_valid_to IS NULL
 
-    -- {{limit_data_in_dev('order_date', 1000)}}
+    -- Set the limit for 1000 days order data
+    {{ limit_data_in_dev('order_date', 1000) }}
 
 ),
 
